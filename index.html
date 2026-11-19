@@ -129,7 +129,7 @@ a{color:var(--azul-ink)}
       <div id="lista" style="margin-top:6px"></div>
     </div>
 
-    <details class="panel" style="margin-top:14px">
+    <details class="panel" id="orgwrap" hidden style="margin-top:14px">
       <summary><span>Painel do organizador</span><span class="small muted" id="org-state">entrar</span></summary>
       <div id="org-body" class="card"></div>
     </details>
@@ -145,12 +145,12 @@ a{color:var(--azul-ink)}
    1) COLE AQUI A CONFIG DO SEU FIREBASE (veja COMECE-AQUI.txt)
    ============================================================ */
 const firebaseConfig = {
-  apiKey: "AIzaSyCsJBL4Fnm_YN1EIAKHfl_KIZmqvSuw-zM",
-  authDomain: "bolao-tatame.firebaseapp.com",
-  projectId: "bolao-tatame",
-  storageBucket: "bolao-tatame.firebasestorage.app",
-  messagingSenderId: "421624228216",
-  appId: "1:421624228216:web:1711e06e0765530be6008d"
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
 };
 /* ============================================================ */
 
@@ -178,6 +178,8 @@ const cpfMask=c=>{c=(c||'').replace(/\D/g,'').padEnd(11,'•');return c.slice(0,
 const nomeCurto=n=>{const p=String(n||'').trim().split(/\s+/).filter(Boolean);if(!p.length)return '—';return p[0]+(p[1]?' '+p[1][0].toUpperCase()+'.':'');};
 
 const ROOM=(location.hash.replace('#','').replace(/[^a-zA-Z0-9_-]/g,'')||'principal');
+// Painel do organizador só aparece no link secreto: ...?admin  (ou /painel.html)
+const ADMIN=new URLSearchParams(location.search).has('admin');
 const DEFAULT_CFG={lutadorA:'Anderson Silva',lutadorB:'Esposte',evento:'Desafio entre Gigantes',data:'28/11 · 13h00',pixKey:'',pixNome:'',pixCidade:'',premioPct:10,status:'aberto',vencedor:null,abreTs:null,fechaTs:null};
 
 let db=null,auth=null,uid=null,anon=true,email=null;
@@ -351,6 +353,8 @@ function renderLista(){
     ${isOrg?`<button class="btn sm ghost" data-toggle="${esc(b.id)}">${b.pago?'↺':'✓ pago'}</button><button class="btn sm ghost" data-del="${esc(b.id)}" style="color:var(--verm-ink)">✕</button>`:''}</div>`).join('');
 }
 function renderOrg(){
+  const wrap=el('orgwrap'); if(wrap) wrap.hidden=!ADMIN;
+  if(!ADMIN) return;              // apostadores não veem o painel
   const body=el('org-body');
   const canConfig = isOrg || (email && !cfg);
   if(canConfig){
@@ -388,8 +392,7 @@ function renderOrg(){
   }
   body.innerHTML=`<label>E-mail do organizador</label><input id="org-email" type="email" autocomplete="username" placeholder="voce@email.com">
     <div class="field"><label>Senha</label><input id="org-pass" type="password" autocomplete="current-password" placeholder="sua senha"></div>
-    <div class="row" style="margin-top:12px"><button class="btn gold" data-act="org-login" style="flex:1">Entrar</button><button class="btn ghost" data-act="org-signup" style="flex:1">Criar conta</button></div>
-    <p class="note" style="margin-top:8px">Só <b>você</b>, o organizador, loga aqui. Os apostadores não precisam de conta. É este login que protege a chave Pix e o CPF.</p>`;
+    <div class="row" style="margin-top:12px"><button class="btn gold" data-act="org-login" style="flex:1">Entrar</button><button class="btn ghost" data-act="org-signup" style="flex:1">Criar conta</button></div>`;
 }
 
 /* Escritas */
