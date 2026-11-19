@@ -65,7 +65,8 @@ label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin:0 0
 .legend{display:flex;justify-content:space-between;font-size:12px;margin-top:6px}
 .sides{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
 .sidebtn{border:2px solid var(--line);background:#0e121a;border-radius:12px;padding:12px;text-align:center;font-weight:800;color:var(--fg)}
-.sidebtn .t{font-family:var(--disp);font-size:17px;display:block;line-height:1.1}
+.sidebtn .t{font-family:var(--disp);font-size:19px;display:block;line-height:1.1;color:#fff}
+.sidebtn.A.on .t,.sidebtn.B.on .t{color:#fff}
 .sidebtn.A.on{border-color:var(--azul);background:var(--azul-dim);color:var(--azul-ink)}
 .sidebtn.B.on{border-color:var(--verm);background:var(--verm-dim);color:var(--verm-ink)}
 .chip{flex:1;min-width:64px}.chip.on{background:var(--gold);color:#241c00;border-color:var(--gold)}
@@ -180,7 +181,7 @@ const nomeCurto=n=>{const p=String(n||'').trim().split(/\s+/).filter(Boolean);if
 const ROOM=(location.hash.replace('#','').replace(/[^a-zA-Z0-9_-]/g,'')||'principal');
 // Painel do organizador só aparece no link secreto: ...?admin  (ou /painel.html)
 const ADMIN=new URLSearchParams(location.search).has('admin');
-const DEFAULT_CFG={lutadorA:'Anderson Silva',lutadorB:'Esposte',evento:'Desafio entre Gigantes',data:'28/11 · 13h00',pixKey:'',pixNome:'',pixCidade:'',premioPct:10,status:'aberto',vencedor:null,abreTs:null,fechaTs:null};
+const DEFAULT_CFG={lutadorA:'Anderson Silva',lutadorB:'Esposte',evento:'Desafio entre Gigantes',data:'28/11 · 13h00',categoria:'',pixKey:'',pixNome:'',pixCidade:'',premioPct:10,status:'aberto',vencedor:null,abreTs:null,fechaTs:null};
 
 let db=null,auth=null,uid=null,anon=true,email=null;
 let cfg=null,apostas={},pagos={},privadoMine=null,privadoAll={};
@@ -269,7 +270,7 @@ function render(){
   }
   const c=C(),st=effStatus(c),t=totals();
   el('titulo').innerHTML=`<span style="color:var(--azul-ink)">${esc(c.lutadorA||'Lado Azul')}</span> <span class="muted">×</span> <span style="color:var(--verm-ink)">${esc(c.lutadorB||'Lado Vermelho')}</span>`;
-  el('subtitulo').textContent=[c.evento,c.data].filter(Boolean).join(' · ');
+  el('subtitulo').innerHTML=[c.evento,c.data].filter(Boolean).map(esc).join(' · ')+(c.categoria?`<br><span class="pill" style="display:inline-block;margin-top:6px;background:#2b2410;border-color:#5a4a1f;color:var(--gold-ink)">${esc(c.categoria)}</span>`:'');
   const b=el('status-badge');b.className='pill '+(st==='aberto'?'aberto':st==='encerrado'?'encerrado':'fechado');
   b.textContent=st==='aberto'?'apostas abertas':st==='breve'?'abre em breve':st==='fechado'?'apostas fechadas':'encerrado';
   el('pool-big').textContent=BRL(t.pool);
@@ -365,6 +366,7 @@ function renderOrg(){
       <div class="field"><label>Canto VERMELHO</label><input id="c-b" maxlength="40" value="${esc(c.lutadorB||'')}"></div>
       <div class="row"><div class="field" style="flex:1"><label>Evento</label><input id="c-ev" maxlength="60" value="${esc(c.evento||'')}"></div>
         <div class="field" style="flex:1"><label>Data</label><input id="c-dt" maxlength="30" value="${esc(c.data||'')}"></div></div>
+      <div class="field"><label>Tipo de duelo / categoria (aparece pra todos)</label><input id="c-cat" maxlength="50" placeholder="Ex.: Faixa Branca · Adulto · até 76kg" value="${esc(c.categoria||'')}"></div>
       <h3 class="disp" style="font-size:18px;margin-top:16px">Pix (recebe as apostas)</h3>
       <div class="field"><label>Sua chave Pix</label><input id="c-pk" maxlength="80" value="${esc(c.pixKey||'')}"></div>
       <div class="row"><div class="field" style="flex:1"><label>Nome recebedor</label><input id="c-pn" maxlength="25" value="${esc(c.pixNome||'')}"></div>
@@ -448,7 +450,7 @@ document.addEventListener('click',async ev=>{
 
   if(!isOrg && !(email && !cfg))return;
   if(act==='salvar-cfg'){
-    const patch={lutadorA:(el('c-a').value||'').trim(),lutadorB:(el('c-b').value||'').trim(),evento:(el('c-ev').value||'').trim(),data:(el('c-dt').value||'').trim(),
+    const patch={lutadorA:(el('c-a').value||'').trim(),lutadorB:(el('c-b').value||'').trim(),evento:(el('c-ev').value||'').trim(),data:(el('c-dt').value||'').trim(),categoria:(el('c-cat').value||'').trim(),
       pixKey:(el('c-pk').value||'').trim(),pixNome:(el('c-pn').value||'').trim(),pixCidade:(el('c-pc').value||'').trim(),
       premioPct:Math.max(0,Math.min(50,+el('c-tx').value||0)),
       abreTs:localToTs(el('c-abre').value),fechaTs:localToTs(el('c-fecha').value)};
