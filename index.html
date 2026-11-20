@@ -3,113 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Bolão do Tatame — Jiu-Jitsu</title>
+<title>Bolão do Tatame · Jiu-Jitsu</title>
 <meta name="description" content="Bolão entre amigos para lutas de jiu-jitsu. Cadastro no celular, pool ao vivo e Pix.">
-<!-- Preview ao compartilhar (WhatsApp, redes) -->
+
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Bolão do Tatame">
-<meta property="og:title" content="Bolão do Tatame — Jiu-Jitsu">
+<meta property="og:title" content="Bolão do Tatame · Jiu-Jitsu">
 <meta property="og:description" content="Escolha seu lutador, veja a cotação ao vivo e entre no bolão. Pix na tela, entre amigos.">
 <meta property="og:image" content="https://bolao-tatame.vercel.app/og-image.jpg">
 <meta property="og:image:width" content="720">
 <meta property="og:image:height" content="880">
 <meta property="og:url" content="https://bolao-tatame.vercel.app/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Bolão do Tatame — Jiu-Jitsu">
+<meta name="twitter:title" content="Bolão do Tatame · Jiu-Jitsu">
 <meta name="twitter:description" content="Escolha seu lutador, veja a cotação ao vivo e entre no bolão. Pix na tela, entre amigos.">
 <meta name="twitter:image" content="https://bolao-tatame.vercel.app/og-image.jpg">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.js"></script>
-<style>
-:root{
-  color-scheme:dark;
-  --bg:#0c0e13;--panel:#141821;--panel2:#1c212c;--line:#282e3a;
-  --fg:#edf0f6;--muted:#949eb0;
-  --azul:#2f6bff;--azul-ink:#9cbcff;--azul-dim:#132442;
-  --verm:#e8394c;--verm-ink:#ff98a3;--verm-dim:#381520;
-  --gold:#e9b949;--gold-ink:#ffe3a0;--ok:#2fbd83;--warn:#e79443;
-  --disp:'Anton',Impact,system-ui,sans-serif;
-  --body:'Archivo',system-ui,-apple-system,Segoe UI,sans-serif;
-  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
-}
-*{box-sizing:border-box}html,body{margin:0}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.5;padding-top:env(safe-area-inset-top,0);
-  background-image:radial-gradient(1100px 440px at 50% -8%,#1a2131 0,transparent 62%)}
-.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0));padding-right:max(16px,env(safe-area-inset-right,0));padding-block:20px 72px}
-h1,h2,h3{margin:0;text-wrap:balance}
-.disp{font-family:var(--disp);font-weight:400;letter-spacing:.01em}
-.num{font-variant-numeric:tabular-nums}.muted{color:var(--muted)}
-.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700}
-.small{font-size:12.5px}
-.poster{display:block;width:100%;max-width:440px;margin:6px auto 2px;border-radius:14px;border:1px solid var(--line);box-shadow:0 6px 24px #0007}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px}
-button{font-family:var(--body);cursor:pointer}
-.btn{border:1px solid var(--line);background:var(--panel2);color:var(--fg);padding:11px 14px;border-radius:11px;font-weight:700;font-size:14px}
-.btn:hover{border-color:#3a4252}.btn.gold{background:var(--gold);color:#241c00;border-color:var(--gold)}
-.btn.ok{background:var(--ok);color:#042b1c;border-color:var(--ok)}.btn.ghost{background:transparent}
-.btn.sm{padding:7px 10px;font-size:12.5px;border-radius:9px}.btn.block{width:100%}.btn:disabled{opacity:.42;cursor:not-allowed}
-input,select{font-family:var(--body);font-size:15px;background:#0e121a;border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:11px 12px;width:100%}
-input:focus{outline:2px solid #3a63b5;outline-offset:1px;border-color:#3a63b5}
-label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin:0 0 5px}
-.field{margin-top:11px}.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{min-width:0}
-.pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--line)}
-.pill.aberto{color:var(--ok);border-color:#1f5a44;background:#0e2b22}
-.pill.fechado{color:var(--warn);border-color:#5a4524;background:#2b2210}
-.pill.encerrado{color:var(--gold-ink);border-color:#5a4a1f;background:#2b2410}
-.head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-.titulo{font-family:var(--disp);font-size:clamp(23px,6.5vw,34px);line-height:1.04;margin-top:6px}
-.pool{background:linear-gradient(180deg,#201a0a,#141821);border:1px solid #4a3c17;border-radius:14px;padding:15px 16px;margin-top:16px;text-align:center}
-.pool .big{font-family:var(--disp);font-size:clamp(36px,12vw,58px);color:var(--gold);line-height:1}
-.cartaz{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:stretch;margin-top:14px}
-.corner{border:1px solid var(--line);border-radius:14px;padding:14px;position:relative;overflow:hidden}
-.corner.A{background:linear-gradient(180deg,var(--azul-dim),#11151f);border-color:#27426f}
-.corner.B{background:linear-gradient(180deg,var(--verm-dim),#11151f);border-color:#5e2530}
-.corner .side{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
-.corner.A .side{color:var(--azul-ink)}.corner.B .side{color:var(--verm-ink)}
-.corner .nome{font-family:var(--disp);font-size:clamp(19px,5.6vw,27px);line-height:1.03;margin:5px 0 11px;word-break:break-word}
-.corner .odd{font-family:var(--disp);font-size:31px;line-height:1}
-.corner.A .odd{color:var(--azul-ink)}.corner.B .odd{color:var(--verm-ink)}
-.corner .stat{font-size:12px;color:var(--muted);margin-top:3px}
-.corner.win{box-shadow:0 0 0 2px var(--gold) inset,0 0 26px #e9b94930}
-.vs{align-self:center;font-family:var(--disp);font-size:24px;color:var(--muted)}
-.splitbar{height:12px;border-radius:999px;background:var(--verm);overflow:hidden;margin-top:13px;border:1px solid var(--line)}
-.splitbar>span{display:block;height:100%;background:var(--azul);transition:width .35s}
-.legend{display:flex;justify-content:space-between;font-size:12px;margin-top:6px}
-.sides{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
-.sidebtn{border:2px solid var(--line);background:#0e121a;border-radius:12px;padding:12px;text-align:center;font-weight:800;color:var(--fg)}
-.sidebtn .t{font-family:var(--disp);font-size:19px;display:block;line-height:1.1}
-.sidebtn.A .t{color:var(--azul-ink)}
-.sidebtn.B .t{color:var(--verm-ink)}
-.sidebtn.A.on{border-color:var(--azul);background:var(--azul-dim);color:var(--azul-ink)}
-.sidebtn.B.on{border-color:var(--verm);background:var(--verm-dim);color:var(--verm-ink)}
-.chip{flex:1;min-width:64px}.chip.on{background:var(--gold);color:#241c00;border-color:var(--gold)}
-.betrow{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
-.betrow:first-child{border-top:0}
-.dot{width:10px;height:10px;border-radius:3px;flex:none}.dot.A{background:var(--azul)}.dot.B{background:var(--verm)}
-.betrow .nm{font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tag{font-size:10px;font-weight:800;padding:2px 7px;border-radius:999px;text-transform:uppercase;letter-spacing:.05em}
-.tag.pago{color:var(--ok);background:#0e2b22;border:1px solid #1f5a44}
-.tag.pend{color:var(--warn);background:#2b2210;border:1px solid #5a4524}
-.tag.me{color:var(--azul-ink);background:var(--azul-dim);border:1px solid #27426f}
-.pixbox{background:#0e121a;border:1px dashed #4a3c17;border-radius:12px;padding:14px;margin-top:12px;text-align:center}
-.qr{width:184px;height:184px;margin:6px auto 10px;background:#fff;border-radius:10px;padding:8px}
-.qr svg{width:100%;height:100%;display:block}
-.copia{font-family:var(--mono);font-size:10.5px;color:var(--muted);word-break:break-all;background:#0a0d12;border:1px solid var(--line);border-radius:8px;padding:8px;margin-top:8px;max-height:60px;overflow:auto;text-align:left}
-.note{font-size:12.5px;color:var(--muted)}
-.banner{font-size:12.5px;color:var(--gold-ink);background:#201a0a;border:1px solid #4a3c17;border-radius:10px;padding:10px 12px;margin-top:14px}
-.hr{height:1px;background:var(--line);margin:16px 0}
-.payout{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
-.payout .amt{font-family:var(--disp);font-size:18px;color:var(--gold)}
-details.panel>summary{list-style:none;cursor:pointer;font-weight:800;color:var(--gold-ink);padding:12px 14px;background:#1b1708;border:1px solid #4a3c17;border-radius:14px;display:flex;justify-content:space-between;align-items:center}
-details.panel>summary::-webkit-details-marker{display:none}
-.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#edf0f6;color:#0c0e13;font-weight:700;padding:10px 16px;border-radius:999px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
-.toast.show{opacity:1}
-.foot{margin-top:26px;font-size:11.5px;color:#5c6676;text-align:center;line-height:1.6}
-.setup{background:#2b2210;border:1px solid #5a4524;border-radius:12px;padding:16px;margin-top:16px;font-size:13.5px}
-.setup code{font-family:var(--mono);background:#0a0d12;padding:1px 5px;border-radius:5px;font-size:12px}
-a{color:var(--azul-ink)}
-</style>
+<style>:root{color-scheme:dark;--bg:#0c0e13;--panel:#141821;--panel2:#1c212c;--line:#282e3a;--fg:#edf0f6;--muted:#949eb0;--azul:#2f6bff;--azul-ink:#9cbcff;--azul-dim:#132442;--verm:#e8394c;--verm-ink:#ff98a3;--verm-dim:#381520;--gold:#e9b949;--gold-ink:#ffe3a0;--ok:#2fbd83;--warn:#e79443;--disp:"Anton",Impact,system-ui,sans-serif;--body:"Archivo",system-ui,-apple-system,Segoe UI,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.5;padding-top:env(safe-area-inset-top,0);background-image:radial-gradient(1100px 440px at 50% -8%,#1a2131 0,transparent 62%)}.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0));padding-right:max(16px,env(safe-area-inset-right,0));padding-block:20px 72px}h1,h2,h3{margin:0;text-wrap:balance}.disp{font-family:var(--disp);font-weight:400;letter-spacing:.01em}.num{font-variant-numeric:tabular-nums}.muted{color:var(--muted)}.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700}.small{font-size:12.5px}.poster{display:block;width:100%;max-width:440px;margin:6px auto 2px;border-radius:14px;border:1px solid var(--line);box-shadow:0 6px 24px #0007}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px}button{font-family:var(--body);cursor:pointer}.btn{border:1px solid var(--line);background:var(--panel2);color:var(--fg);padding:11px 14px;border-radius:11px;font-weight:700;font-size:14px}.btn:hover{border-color:#3a4252}.btn.gold{background:var(--gold);color:#241c00;border-color:var(--gold)}.btn.ok{background:var(--ok);color:#042b1c;border-color:var(--ok)}.btn.ghost{background:transparent}.btn.sm{padding:7px 10px;font-size:12.5px;border-radius:9px}.btn.block{width:100%}.btn:disabled{opacity:.42;cursor:not-allowed}input,select{font-family:var(--body);font-size:15px;background:#0e121a;border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:11px 12px;width:100%}input:focus{outline:2px solid #3a63b5;outline-offset:1px;border-color:#3a63b5}label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin:0 0 5px}.field{margin-top:11px}.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{min-width:0}.pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--line)}.pill.aberto{color:var(--ok);border-color:#1f5a44;background:#0e2b22}.pill.fechado{color:var(--warn);border-color:#5a4524;background:#2b2210}.pill.encerrado{color:var(--gold-ink);border-color:#5a4a1f;background:#2b2410}.head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.titulo{font-family:var(--disp);font-size:clamp(23px,6.5vw,34px);line-height:1.04;margin-top:6px}.pool{background:linear-gradient(180deg,#201a0a,#141821);border:1px solid #4a3c17;border-radius:14px;padding:15px 16px;margin-top:16px;text-align:center}.pool .big{font-family:var(--disp);font-size:clamp(36px,12vw,58px);color:var(--gold);line-height:1}.cartaz{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:stretch;margin-top:14px}.corner{border:1px solid var(--line);border-radius:14px;padding:14px;position:relative;overflow:hidden}.corner.A{background:linear-gradient(180deg,var(--azul-dim),#11151f);border-color:#27426f}.corner.B{background:linear-gradient(180deg,var(--verm-dim),#11151f);border-color:#5e2530}.corner .side{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.corner.A .side{color:var(--azul-ink)}.corner.B .side{color:var(--verm-ink)}.corner .nome{font-family:var(--disp);font-size:clamp(19px,5.6vw,27px);line-height:1.03;margin:5px 0 11px;word-break:break-word}.corner .odd{font-family:var(--disp);font-size:31px;line-height:1}.corner.A .odd{color:var(--azul-ink)}.corner.B .odd{color:var(--verm-ink)}.corner .stat{font-size:12px;color:var(--muted);margin-top:3px}.corner.win{box-shadow:0 0 0 2px var(--gold) inset,0 0 26px #e9b94930}.vs{align-self:center;font-family:var(--disp);font-size:24px;color:var(--muted)}.splitbar{height:12px;border-radius:999px;background:var(--verm);overflow:hidden;margin-top:13px;border:1px solid var(--line)}.splitbar>span{display:block;height:100%;background:var(--azul);transition:width .35s}.legend{display:flex;justify-content:space-between;font-size:12px;margin-top:6px}.sides{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}.sidebtn{border:2px solid var(--line);background:#0e121a;border-radius:12px;padding:12px;text-align:center;font-weight:800;color:var(--fg)}.sidebtn .t{font-family:var(--disp);font-size:19px;display:block;line-height:1.1}.sidebtn.A .t{color:var(--azul-ink)}.sidebtn.B .t{color:var(--verm-ink)}.sidebtn.A.on{border-color:var(--azul);background:var(--azul-dim);color:var(--azul-ink)}.sidebtn.B.on{border-color:var(--verm);background:var(--verm-dim);color:var(--verm-ink)}.chip{flex:1;min-width:64px}.chip.on{background:var(--gold);color:#241c00;border-color:var(--gold)}.betrow{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}.betrow:first-child{border-top:0}.dot{width:10px;height:10px;border-radius:3px;flex:none}.dot.A{background:var(--azul)}.dot.B{background:var(--verm)}.betrow .nm{font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tag{font-size:10px;font-weight:800;padding:2px 7px;border-radius:999px;text-transform:uppercase;letter-spacing:.05em}.tag.pago{color:var(--ok);background:#0e2b22;border:1px solid #1f5a44}.tag.pend{color:var(--warn);background:#2b2210;border:1px solid #5a4524}.tag.me{color:var(--azul-ink);background:var(--azul-dim);border:1px solid #27426f}.pixbox{background:#0e121a;border:1px dashed #4a3c17;border-radius:12px;padding:14px;margin-top:12px;text-align:center}.qr{width:184px;height:184px;margin:6px auto 10px;background:#fff;border-radius:10px;padding:8px}.qr svg{width:100%;height:100%;display:block}.copia{font-family:var(--mono);font-size:10.5px;color:var(--muted);word-break:break-all;background:#0a0d12;border:1px solid var(--line);border-radius:8px;padding:8px;margin-top:8px;max-height:60px;overflow:auto;text-align:left}.note{font-size:12.5px;color:var(--muted)}.banner{font-size:12.5px;color:var(--gold-ink);background:#201a0a;border:1px solid #4a3c17;border-radius:10px;padding:10px 12px;margin-top:14px}.hr{height:1px;background:var(--line);margin:16px 0}.payout{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}.payout .amt{font-family:var(--disp);font-size:18px;color:var(--gold)}details.panel>summary{list-style:none;cursor:pointer;font-weight:800;color:var(--gold-ink);padding:12px 14px;background:#1b1708;border:1px solid #4a3c17;border-radius:14px;display:flex;justify-content:space-between;align-items:center}details.panel>summary::-webkit-details-marker{display:none}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%);background:#edf0f6;color:#0c0e13;font-weight:700;padding:10px 16px;border-radius:999px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}.toast.show{opacity:1}.foot{margin-top:26px;font-size:11.5px;color:#5c6676;text-align:center;line-height:1.6}.setup{background:#2b2210;border:1px solid #5a4524;border-radius:12px;padding:16px;margin-top:16px;font-size:13.5px}.setup code{font-family:var(--mono);background:#0a0d12;padding:1px 5px;border-radius:5px;font-size:12px}a{color:var(--azul-ink)}</style>
 </head>
 <body>
 <div class="wrap">
@@ -133,7 +45,7 @@ a{color:var(--azul-ink)}
     <div id="cartaz" class="cartaz"></div>
     <div class="splitbar"><span id="split" style="width:50%"></span></div>
     <div class="legend"><span id="leg-a" style="color:var(--azul-ink)"></span><span id="leg-b" style="color:var(--verm-ink)"></span></div>
-    <div class="banner">Bolão privado entre amigos. A organização não fica com margem — o bolo é dividido entre os acertadores e uma fatia vai como bolsa para o lutador vencedor.</div>
+    <div class="banner">Bolão privado entre amigos. A organização não fica com margem: o bolo é dividido entre os acertadores e uma fatia vai como bolsa para o lutador vencedor.</div>
 
     <div id="resultado"></div>
     <div id="minha" class="card"></div>
@@ -155,262 +67,60 @@ a{color:var(--azul-ink)}
 </div>
 <div id="toast" class="toast"></div>
 
-<script type="module">
-
-/* ============================================================
-   1) COLE AQUI A CONFIG DO SEU FIREBASE (veja COMECE-AQUI.txt)
-   ============================================================ */
-const firebaseConfig = {
-  apiKey: "AIzaSyCsJBL4Fnm_YN1EIAKHfl_KIZmqvSuw-zM",
-  authDomain: "bolao-tatame.firebaseapp.com",
-  projectId: "bolao-tatame",
-  storageBucket: "bolao-tatame.firebasestorage.app",
-  messagingSenderId: "421624228216",
-  appId: "1:421624228216:web:1711e06e0765530be6008d"
-};
-/* ============================================================ */
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, doc, collection, onSnapshot, setDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { getAuth, signInAnonymously, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-const BRL=v=>(Number(v)||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const el=id=>document.getElementById(id);
-let toastT;function toast(m){const t=el('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2000);}
-
-/* Pix EMV */
-function emv(id,v){v=String(v);return id+String(v.length).padStart(2,'0')+v;}
-function crc16(s){let c=0xFFFF;for(let i=0;i<s.length;i++){c^=s.charCodeAt(i)<<8;for(let j=0;j<8;j++){c=(c&0x8000)?((c<<1)^0x1021):(c<<1);c&=0xFFFF;}}return c.toString(16).toUpperCase().padStart(4,'0');}
-const au=s=>String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toUpperCase().replace(/[^A-Z0-9 ]/g,'').trim();
-function pixPayload(o){if(!o.key)return'';const mai=emv('00','br.gov.bcb.pix')+emv('01',o.key);
-  let p=emv('00','01')+emv('01','11')+emv('26',mai)+emv('52','0000')+emv('53','986');
-  if(o.valor&&+o.valor>0)p+=emv('54',(+o.valor).toFixed(2));
-  p+=emv('58','BR')+emv('59',(au(o.nome)||'RECEBEDOR').slice(0,25))+emv('60',(au(o.cidade)||'CIDADE').slice(0,15));
-  const tx=String(o.txid||'').normalize('NFD').replace(/[^A-Za-z0-9]/g,'').slice(0,25)||'***';p+=emv('62',emv('05',tx));p+='6304';return p+crc16(p);}
-function qrSvg(p){try{if(typeof qrcode==='undefined')return'';const q=qrcode(0,'M');q.addData(p);q.make();return q.createSvgTag({cellSize:5,margin:0,scalable:true});}catch(e){return'';}}
-function isCPF(c){c=(c||'').replace(/\D/g,'');if(c.length!==11||/^(\d)\1{10}$/.test(c))return false;let s=0;for(let i=0;i<9;i++)s+=+c[i]*(10-i);let d=(s*10)%11;if(d>9)d=0;if(d!==+c[9])return false;s=0;for(let i=0;i<10;i++)s+=+c[i]*(11-i);d=(s*10)%11;if(d>9)d=0;return d===+c[10];}
-const cpfMask=c=>{c=(c||'').replace(/\D/g,'').padEnd(11,'•');return c.slice(0,3)+'.'+c.slice(3,6)+'.'+c.slice(6,9)+'-'+c.slice(9,11);};
-const nomeCurto=n=>{const p=String(n||'').trim().split(/\s+/).filter(Boolean);if(!p.length)return '—';return p[0]+(p[1]?' '+p[1][0].toUpperCase()+'.':'');};
-
-const ROOM=(location.hash.replace('#','').replace(/[^a-zA-Z0-9_-]/g,'')||'principal');
-// Painel do organizador só aparece no link secreto: ...?admin  (ou /painel.html)
-const ADMIN=new URLSearchParams(location.search).has('admin');
-const DEFAULT_CFG={lutadorA:'Anderson Silva',lutadorB:'Esposte',evento:'Desafio entre Gigantes',data:'28/11 · 13h00',chamada:'',categoria:'',cartazImg:'',pixKey:'',pixNome:'',pixCidade:'',premioPct:10,status:'aberto',vencedor:null,abreTs:null,fechaTs:null};
-
-let db=null,auth=null,uid=null,anon=true,email=null;
-let cfg=null,apostas={},pagos={},privadoMine=null,privadoAll={};
-let isOrg=false,orgPrefilled=false,editing=false;
-let unsubPrivMine=null,unsubPrivAll=null;
-let fotoNova=null,POSTER_DEFAULT=null; // cartaz: troca pelo painel
-// Lê a imagem escolhida, reduz pra não pesar no banco, devolve dataURL (ou null)
-function lerFoto(file,cb){
-  const r=new FileReader();
-  r.onload=()=>{ const img=new Image();
-    img.onload=()=>{ const enc=(mw,q)=>{let w=img.width,h=img.height;if(w>mw){h=Math.round(h*mw/w);w=mw;}const cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(img,0,0,w,h);return cv.toDataURL('image/jpeg',q);};
-      let d=enc(900,0.82); if(d.length>700000)d=enc(800,0.7); if(d.length>700000)d=enc(640,0.62);
-      cb(d.length>900000?null:d); };
-    img.onerror=()=>cb(null); img.src=r.result; };
-  r.onerror=()=>cb(null); r.readAsDataURL(file);
-}
-
-const roomRef=()=>doc(db,'salas',ROOM);
-const sub=(path)=>collection(db,'salas',ROOM,path);
-
-if(!firebaseConfig.projectId){
-  el('setup').hidden=false;el('status-badge').textContent='configurar';
-  el('setup').innerHTML='<b>Falta conectar o Firebase (grátis).</b><br>Abra o <code>COMECE-AQUI.txt</code>, crie o projeto, ative Login (Anônimo + E-mail/senha), cole a config no topo deste arquivo e publique as regras.';
-  el('titulo').textContent='Quase lá';
-}else{
-  try{
-    const app=initializeApp(firebaseConfig);
-    db=getFirestore(app);auth=getAuth(app);
-    onAuthStateChanged(auth,u=>{ uid=u?u.uid:null; anon=u?u.isAnonymous:true; email=(u&&!u.isAnonymous)?u.email:null; onUser(); });
-    signInAnonymously(auth).catch(()=>{ el('setup').hidden=false; el('setup').innerHTML='Ative <b>Authentication → Sign-in method → Anônimo</b> no Firebase.'; });
-    subscribeShared();
-  }catch(e){ el('setup').hidden=false; el('setup').textContent='Config do Firebase inválida: '+e.message; }
-}
-
-function subscribeShared(){
-  el('app').hidden=false;el('setup').hidden=true;
-  onSnapshot(roomRef(), s=>{ cfg=s.exists()?s.data():null; onCfgOrUser(); }, e=>{ console.warn(e); el('setup').hidden=false; el('setup').innerHTML='Sem permissão de leitura. Confira as <b>regras do Firestore</b> (COMECE-AQUI.txt).'; });
-  onSnapshot(sub('apostas'), s=>{ apostas={}; s.forEach(d=>apostas[d.id]=d.data()); render(); }, e=>console.warn(e));
-  onSnapshot(sub('pagos'), s=>{ pagos={}; s.forEach(d=>{const v=d.data(); pagos[d.id]=!!(v&&v.pago);}); render(); }, e=>console.warn(e));
-}
-function onUser(){
-  if(unsubPrivMine){unsubPrivMine();unsubPrivMine=null;}
-  privadoMine=null;
-  if(uid) unsubPrivMine=onSnapshot(doc(db,'salas',ROOM,'privado',uid), s=>{ privadoMine=s.exists()?s.data():null; render(); }, ()=>{});
-  onCfgOrUser();
-}
-function onCfgOrUser(){
-  isOrg=!!(cfg && cfg.ownerUid && uid && cfg.ownerUid===uid);
-  if(isOrg && !unsubPrivAll){
-    unsubPrivAll=onSnapshot(sub('privado'), s=>{ privadoAll={}; s.forEach(d=>privadoAll[d.id]=d.data()); render(); }, ()=>{});
-  }else if(!isOrg && unsubPrivAll){ unsubPrivAll();unsubPrivAll=null;privadoAll={}; }
-  orgPrefilled=false;
-  render();
-}
-
-const C=()=>cfg||DEFAULT_CFG;
-const sideName=k=>k==='A'?(C().lutadorA||'Lado Azul'):(C().lutadorB||'Lado Vermelho');
-// Status EFETIVO: respeita a janela de horário mesmo que o dono tenha deixado "aberto".
-// encerrado (resultado) e fechado-manual sempre vencem. 'breve' = ainda não abriu.
-function effStatus(c){ c=c||C();
-  if(c.status==='encerrado')return'encerrado';
-  if(c.status==='fechado')return'fechado';
-  const now=Date.now();
-  if(c.abreTs&&now<c.abreTs)return'breve';
-  if(c.fechaTs&&now>c.fechaTs)return'fechado';
-  return'aberto';
-}
-// datetime-local <-> ms
-const tsToLocal=ms=>{ if(!ms)return''; const d=new Date(ms); const p=n=>String(n).padStart(2,'0'); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`; };
-const localToTs=v=>{ if(!v)return null; const t=new Date(v).getTime(); return isNaN(t)?null:t; };
-const fmtTs=ms=>{ if(!ms)return'—'; const d=new Date(ms),p=n=>String(n).padStart(2,'0'); return `${p(d.getDate())}/${p(d.getMonth()+1)} ${p(d.getHours())}h${p(d.getMinutes())}`; };
-function betsList(){
-  return Object.keys(apostas).map(id=>{
-    const a=apostas[id]||{}, priv = isOrg?privadoAll[id] : (id===uid?privadoMine:null);
-    return {id,lutador:a.lutador,valor:+a.valor||0,displayName:a.displayName||'—',pago:!!pagos[id],
-      nome:priv?priv.nome:null,cpf:priv?priv.cpf:null,pixRecebe:priv?priv.pixRecebe:null};
-  });
-}
-const myBet=()=>{ if(!uid||!apostas[uid])return null; const a=apostas[uid]; return {id:uid,lutador:a.lutador,valor:+a.valor||0,displayName:a.displayName,pago:!!pagos[uid],nome:privadoMine&&privadoMine.nome,cpf:privadoMine&&privadoMine.cpf,pixRecebe:privadoMine&&privadoMine.pixRecebe}; };
-function totals(){
-  const bs=betsList(),paid=bs.filter(b=>b.pago);
-  const tA=paid.filter(b=>b.lutador==='A').reduce((s,b)=>s+b.valor,0);
-  const tB=paid.filter(b=>b.lutador==='B').reduce((s,b)=>s+b.valor,0);
-  const nA=paid.filter(b=>b.lutador==='A').length,nB=paid.filter(b=>b.lutador==='B').length;
-  const pool=tA+tB,pct=Math.max(0,Math.min(50,+C().premioPct||0))/100;
-  const oddA=tA>0?1+(tB*(1-pct))/tA:0,oddB=tB>0?1+(tA*(1-pct))/tB:0;
-  return{tA,tB,nA,nB,pool,pct,oddA,oddB,pendente:bs.filter(b=>!b.pago).reduce((s,b)=>s+b.valor,0)};
-}
-
-function render(){
-  if(!cfg && !email){
-    {const ch=el('chamada');if(ch)ch.style.display='none';}
-    el('titulo').textContent='Luta ainda não configurada';
-    el('subtitulo').textContent='Aguardando o organizador publicar a luta.';
-    el('status-badge').className='pill fechado';el('status-badge').textContent='em breve';
-    el('cartaz').innerHTML='';el('minha').innerHTML='';el('lista').innerHTML='<div class="muted small">—</div>';
-    el('resultado').innerHTML='';renderOrg();el('foot').textContent='';return;
-  }
-  const c=C(),st=effStatus(c),t=totals();
-  { const ch=el('chamada'); if(ch){ ch.textContent=c.chamada||''; ch.style.display=c.chamada?'block':'none'; } }
-  { const pe=el('poster'); if(pe){ if(POSTER_DEFAULT===null)POSTER_DEFAULT=pe.getAttribute('src'); pe.src=c.cartazImg||POSTER_DEFAULT; } }
-  el('titulo').innerHTML=`<span style="color:var(--azul-ink)">${esc(c.lutadorA||'Lado Azul')}</span> <span class="muted">×</span> <span style="color:var(--verm-ink)">${esc(c.lutadorB||'Lado Vermelho')}</span>`;
-  el('subtitulo').innerHTML=[c.evento,c.data].filter(Boolean).map(esc).join(' · ')+(c.categoria?`<br><span class="pill" style="display:inline-block;margin-top:6px;background:#2b2410;border-color:#5a4a1f;color:var(--gold-ink)">${esc(c.categoria)}</span>`:'');
-  const b=el('status-badge');b.className='pill '+(st==='aberto'?'aberto':st==='encerrado'?'encerrado':'fechado');
-  b.textContent=st==='aberto'?'apostas abertas':st==='breve'?'abre em breve':st==='fechado'?'apostas fechadas':'encerrado';
-  el('pool-big').textContent=BRL(t.pool);
-  const janela = st==='breve'&&c.abreTs?` · <span style="color:var(--gold-ink)">abre ${fmtTs(c.abreTs)}</span>`
-    : st==='aberto'&&c.fechaTs?` · <span style="color:var(--gold-ink)">fecha ${fmtTs(c.fechaTs)}</span>` : '';
-  el('pool-sub').innerHTML=`${t.nA+t.nB} confirmada(s)`+(t.pendente>0?` · <span style="color:var(--warn)">${BRL(t.pendente)} aguardando</span>`:'')+(t.pct>0?` · ${Math.round(t.pct*100)}% p/ o campeão`:'')+janela;
-  const corner=(k,nome,odd,tot,n,cor)=>{const win=st==='encerrado'&&c.vencedor===k;
-    return`<div class="corner ${k} ${win?'win':''}"><div class="side">Canto ${cor}${win?' · campeão':''}</div>
-      <div class="nome">${esc(nome)}</div><div class="odd num">${odd>0?odd.toFixed(2)+'×':'—'}</div>
-      <div class="stat">paga por R$1</div><div class="stat num">${BRL(tot)} · ${n} aposta(s)</div></div>`;};
-  el('cartaz').innerHTML=corner('A',c.lutadorA||'Lado Azul',t.oddA,t.tA,t.nA,'Azul')+`<div class="vs">VS</div>`+corner('B',c.lutadorB||'Lado Vermelho',t.oddB,t.tB,t.nB,'Vermelho');
-  const p=t.pool>0?Math.round(t.tA/t.pool*100):50;el('split').style.width=p+'%';
-  el('leg-a').textContent=`Azul · ${BRL(t.tA)} (${p}%)`;el('leg-b').textContent=`(${100-p}%) ${BRL(t.tB)} · Vermelho`;
-  renderResultado(t);renderMinha(t);renderLista();renderOrg();
-  el('foot').innerHTML=`Sala: <b>${esc(ROOM)}</b> · compartilhe este link.`+(isOrg?' Você é o organizador.':'');
-}
-function renderResultado(t){
-  const c=C(),box=el('resultado');
-  if(c.status!=='encerrado'||!c.vencedor){box.innerHTML='';return;}
-  const v=c.vencedor,bs=betsList(),paid=bs.filter(b=>b.pago);let rows='',title='';
-  const nm=b=>isOrg&&b.nome?b.nome:b.displayName;
-  const refund=()=>paid.map(b=>payoutRow(nm(b),b.lutador,b.valor,b.valor,0,b.pixRecebe)).join('')||'<div class="muted small">—</div>';
-  if(v==='empate'){title='Empate — valores devolvidos';rows=refund();}
-  else{const w=paid.filter(b=>b.lutador===v),totW=w.reduce((s,b)=>s+b.valor,0),loser=t.pool-totW;
-    if(totW<=0){title='Ninguém pagou no vencedor — valores devolvidos';rows=refund();}
-    else{const premio=loser*t.pct,distrib=loser-premio;title=`Venceu ${esc(sideName(v))}`;
-      rows=(premio>0?`<div class="payout"><span class="dot ${v}"></span><div style="flex:1"><div class="nm">${esc(sideName(v))} <span class="tag me">bolsa do campeão</span></div></div><div class="amt num">${BRL(premio)}</div></div>`:'')
-        +w.map(b=>{const sh=b.valor+b.valor/totW*distrib;return payoutRow(nm(b),b.lutador,b.valor,sh,sh-b.valor,b.pixRecebe);}).join('');}}
-  box.innerHTML=`<div class="card" style="border-color:#4a3c17"><div class="eyebrow" style="color:var(--gold-ink)">Resultado</div>
-    <h3 class="disp" style="font-size:22px;margin:4px 0 6px">${title}</h3>
-    <div class="note">Rateio proporcional ao valor apostado.${isOrg?' Pague cada acertador no Pix dele.':''}</div><div style="margin-top:8px">${rows}</div></div>`;
-}
-function payoutRow(nome,lado,apost,recebe,lucro,pix){
-  return`<div class="payout"><span class="dot ${lado}"></span><div style="flex:1;min-width:0">
-    <div class="nm">${esc(nome||'—')}</div><div class="small muted num">apostou ${BRL(apost)}${lucro?` · ${lucro>=0?'+':''}${BRL(lucro)}`:''}</div>
-    ${pix&&isOrg?`<div class="small num" style="color:var(--azul-ink);word-break:break-all">Pix: ${esc(pix)} <button class="btn sm ghost" data-copy="${esc(pix)}">copiar</button></div>`:''}
-    </div><div class="amt num">${BRL(recebe)}</div></div>`;
-}
-function renderMinha(t){
-  const c=C(),box=el('minha'),mine=myBet(),est=effStatus(c),aberto=est==='aberto';
-  if(mine&&!editing){
-    const pay=pixPayload({key:c.pixKey,nome:c.pixNome,cidade:c.pixCidade,valor:mine.valor,txid:(mine.nome||mine.displayName)});
-    box.innerHTML=`<div class="eyebrow">Sua aposta</div>
-      <div class="row" style="align-items:center;margin-top:8px"><span class="dot ${mine.lutador}"></span>
-        <div style="flex:1"><b>${esc(mine.nome||mine.displayName)}</b> · ${esc(sideName(mine.lutador))}<br><span class="disp" style="font-size:22px;color:var(--gold)">${BRL(mine.valor)}</span></div>
-        <span class="tag ${mine.pago?'pago':'pend'}">${mine.pago?'pago ✓':'aguardando'}</span></div>
-      ${!mine.pago?(c.pixKey?`<div class="pixbox"><div class="eyebrow" style="color:var(--gold-ink)">Pague ${BRL(mine.valor)}</div>
-        ${qrSvg(pay)?`<div class="qr">${qrSvg(pay)}</div>`:'<div class="note">Código Pix:</div>'}
-        <button class="btn gold" data-copy="${esc(pay)}">Copiar Pix copia e cola</button>
-        <div class="copia">${esc(pay)}</div>
-        <div class="note" style="margin-top:8px">Recebedor: <b>${esc(c.pixNome||'—')}</b>. Depois de pagar, <b>o organizador confirma</b>.</div></div>`
-        :'<p class="note" style="margin-top:10px">O organizador ainda não cadastrou a chave Pix.</p>'):''}
-      <div class="row" style="margin-top:10px">${aberto?`<button class="btn sm ghost" data-act="editar">Editar aposta</button>`:''}</div>`;
-    return;
-  }
-  if(!aberto&&!mine){const txt=est==='breve'?`ainda não abriram${c.abreTs?' — abrem '+fmtTs(c.abreTs):''}`:est==='encerrado'?'encerradas':`fechadas${c.fechaTs&&c.status!=='fechado'?' (fecharam '+fmtTs(c.fechaTs)+')':''}`;box.innerHTML=`<div class="eyebrow">Sua aposta</div><p class="note" style="margin-top:8px">As apostas estão <b>${txt}</b>.</p>`;return;}
-  const m=mine||{};
-  box.innerHTML=`<div class="eyebrow">${mine?'Editar sua aposta':'Entrar no bolão'}</div>
-    <div class="field"><label>Nome completo</label><input id="f-nome" maxlength="60" placeholder="Seu nome completo" value="${esc(m.nome||'')}"></div>
-    <div class="field"><label>CPF <span class="muted">(pra registrar sua aposta)</span></label><input id="f-cpf" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" value="${esc(m.cpf||'')}"></div>
-    <div class="field"><label>Em quem você aposta?</label><div class="sides">
-      <button type="button" class="sidebtn A ${m.lutador==='A'?'on':''}" data-side="A"><span class="t">${esc(c.lutadorA||'Azul')}</span><span class="small">canto azul</span></button>
-      <button type="button" class="sidebtn B ${m.lutador==='B'?'on':''}" data-side="B"><span class="t">${esc(c.lutadorB||'Vermelho')}</span><span class="small">canto vermelho</span></button></div></div>
-    <div class="field"><label>Valor (R$)</label><input id="f-valor" type="number" min="1" step="1" inputmode="decimal" placeholder="50" value="${m.valor||''}"></div>
+<script type="module">const X={apiKey:"AIzaSyCsJBL4Fnm_YN1EIAKHfl_KIZmqvSuw-zM",authDomain:"bolao-tatame.firebaseapp.com",projectId:"bolao-tatame",storageBucket:"bolao-tatame.firebasestorage.app",messagingSenderId:"421624228216",appId:"1:421624228216:web:1711e06e0765530be6008d"};import{initializeApp as ma}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";import{getFirestore as va,doc as C,collection as fa,onSnapshot as k,setDoc as H,updateDoc as ga,deleteDoc as _}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";import{getAuth as ba,signInAnonymously as aa,onAuthStateChanged as ha,signInWithEmailAndPassword as ya,createUserWithEmailAndPassword as xa,signOut as $a}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";const x=a=>(Number(a)||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"}),i=a=>String(a??"").replace(/[&<>"']/g,e=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[e]),n=a=>document.getElementById(a);let ea;function c(a){const e=n("toast");e.textContent=a,e.classList.add("show"),clearTimeout(ea),ea=setTimeout(()=>e.classList.remove("show"),2e3)}function h(a,e){return e=String(e),a+String(e.length).padStart(2,"0")+e}function Aa(a){let e=65535;for(let o=0;o<a.length;o++){e^=a.charCodeAt(o)<<8;for(let t=0;t<8;t++)e=e&32768?e<<1^4129:e<<1,e&=65535}return e.toString(16).toUpperCase().padStart(4,"0")}const ta=a=>String(a||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toUpperCase().replace(/[^A-Z0-9 ]/g,"").trim();function wa(a){if(!a.key)return"";const e=h("00","br.gov.bcb.pix")+h("01",a.key);let o=h("00","01")+h("01","11")+h("26",e)+h("52","0000")+h("53","986");a.valor&&+a.valor>0&&(o+=h("54",(+a.valor).toFixed(2))),o+=h("58","BR")+h("59",(ta(a.nome)||"RECEBEDOR").slice(0,25))+h("60",(ta(a.cidade)||"CIDADE").slice(0,15));const t=String(a.txid||"").normalize("NFD").replace(/[^A-Za-z0-9]/g,"").slice(0,25)||"***";return o+=h("62",h("05",t)),o+="6304",o+Aa(o)}function oa(a){try{if(typeof qrcode>"u")return"";const e=qrcode(0,"M");return e.addData(a),e.make(),e.createSvgTag({cellSize:5,margin:0,scalable:!0})}catch{return""}}function Ta(a){if(a=(a||"").replace(/\D/g,""),a.length!==11||/^(\d)\1{10}$/.test(a))return!1;let e=0;for(let t=0;t<9;t++)e+=+a[t]*(10-t);let o=e*10%11;if(o>9&&(o=0),o!==+a[9])return!1;e=0;for(let t=0;t<10;t++)e+=+a[t]*(11-t);return o=e*10%11,o>9&&(o=0),o===+a[10]}const Ca=a=>(a=(a||"").replace(/\D/g,"").padEnd(11,"\u2022"),a.slice(0,3)+"."+a.slice(3,6)+"."+a.slice(6,9)+"-"+a.slice(9,11)),na=a=>{const e=String(a||"").trim().split(/\s+/).filter(Boolean);return e.length?e[0]+(e[1]?" "+e[1][0].toUpperCase()+".":""):"\u2014"},$=location.hash.replace("#","").replace(/[^a-zA-Z0-9_-]/g,"")||"principal",sa=new URLSearchParams(location.search).has("admin"),la={lutadorA:"Anderson Silva",lutadorB:"Esposte",evento:"Desafio entre Gigantes",data:"28/11 \xB7 13h00",chamada:"",categoria:"",cartazImg:"",pixKey:"",pixNome:"",pixCidade:"",premioPct:10,status:"aberto",vencedor:null,abreTs:null,fechaTs:null};let A=null,z=null,v=null,La=!0,M=null,y=null,B={},F={},w=null,I={},f=!1,P=!1,U=!1,q=null,D=null,N=null,G=null;function Sa(a,e){const o=new FileReader;o.onload=()=>{const t=new Image;t.onload=()=>{const m=(u,r)=>{let s=t.width,d=t.height;s>u&&(d=Math.round(d*u/s),s=u);const l=document.createElement("canvas");return l.width=s,l.height=d,l.getContext("2d").drawImage(t,0,0,s,d),l.toDataURL("image/jpeg",r)};let p=m(900,.82);p.length>7e5&&(p=m(800,.7)),p.length>7e5&&(p=m(640,.62)),e(p.length>9e5?null:p)},t.onerror=()=>e(null),t.src=o.result},o.onerror=()=>e(null),o.readAsDataURL(a)}const W=()=>C(A,"salas",$),J=a=>fa(A,"salas",$,a);if(!X.projectId)n("setup").hidden=!1,n("status-badge").textContent="configurar",n("setup").innerHTML="<b>Falta conectar o Firebase (gr\xE1tis).</b><br>Fale com o organizador.",n("titulo").textContent="Quase l\xE1";else try{const a=ma(X);A=va(a),z=ba(a),ha(z,e=>{v=e?e.uid:null,La=e?e.isAnonymous:!0,M=e&&!e.isAnonymous?e.email:null,Ea()}),aa(z).catch(()=>{n("setup").hidden=!1,n("setup").innerHTML="Ative <b>Authentication \u2192 Sign-in method \u2192 An\xF4nimo</b> no Firebase."}),za()}catch(a){n("setup").hidden=!1,n("setup").textContent="Config do Firebase inv\xE1lida: "+a.message}function za(){n("app").hidden=!1,n("setup").hidden=!0,k(W(),a=>{y=a.exists()?a.data():null,ra()},a=>{console.warn(a),n("setup").hidden=!1,n("setup").innerHTML="Sem permiss\xE3o de leitura."}),k(J("apostas"),a=>{B={},a.forEach(e=>B[e.id]=e.data()),T()},a=>console.warn(a)),k(J("pagos"),a=>{F={},a.forEach(e=>{const o=e.data();F[e.id]=!!(o&&o.pago)}),T()},a=>console.warn(a))}function Ea(){q&&(q(),q=null),w=null,v&&(q=k(C(A,"salas",$,"privado",v),a=>{w=a.exists()?a.data():null,T()},()=>{})),ra()}function ra(){f=!!(y&&y.ownerUid&&v&&y.ownerUid===v),f&&!D?D=k(J("privado"),a=>{I={},a.forEach(e=>I[e.id]=e.data()),T()},()=>{}):!f&&D&&(D(),D=null,I={}),P=!1,T()}const L=()=>y||la,V=a=>a==="A"?L().lutadorA||"Lado Azul":L().lutadorB||"Lado Vermelho";function j(a){if(a=a||L(),a.status==="encerrado")return"encerrado";if(a.status==="fechado")return"fechado";const e=Date.now();return a.abreTs&&e<a.abreTs?"breve":a.fechaTs&&e>a.fechaTs?"fechado":"aberto"}const ia=a=>{if(!a)return"";const e=new Date(a),o=t=>String(t).padStart(2,"0");return`${e.getFullYear()}-${o(e.getMonth()+1)}-${o(e.getDate())}T${o(e.getHours())}:${o(e.getMinutes())}`},da=a=>{if(!a)return null;const e=new Date(a).getTime();return isNaN(e)?null:e},O=a=>{if(!a)return"\u2014";const e=new Date(a),o=t=>String(t).padStart(2,"0");return`${o(e.getDate())}/${o(e.getMonth()+1)} ${o(e.getHours())}h${o(e.getMinutes())}`};function Q(){return Object.keys(B).map(a=>{const e=B[a]||{},o=f?I[a]:a===v?w:null;return{id:a,lutador:e.lutador,valor:+e.valor||0,displayName:e.displayName||"\u2014",pago:!!F[a],nome:o?o.nome:null,cpf:o?o.cpf:null,pixRecebe:o?o.pixRecebe:null}})}const Ma=()=>{if(!v||!B[v])return null;const a=B[v];return{id:v,lutador:a.lutador,valor:+a.valor||0,displayName:a.displayName,pago:!!F[v],nome:w&&w.nome,cpf:w&&w.cpf,pixRecebe:w&&w.pixRecebe}};function Ba(){const a=Q(),e=a.filter(l=>l.pago),o=e.filter(l=>l.lutador==="A").reduce((l,b)=>l+b.valor,0),t=e.filter(l=>l.lutador==="B").reduce((l,b)=>l+b.valor,0),m=e.filter(l=>l.lutador==="A").length,p=e.filter(l=>l.lutador==="B").length,u=o+t,r=Math.max(0,Math.min(50,+L().premioPct||0))/100,s=o>0?1+t*(1-r)/o:0,d=t>0?1+o*(1-r)/t:0;return{tA:o,tB:t,nA:m,nB:p,pool:u,pct:r,oddA:s,oddB:d,pendente:a.filter(l=>!l.pago).reduce((l,b)=>l+b.valor,0)}}function T(){if(!y&&!M){{const r=n("chamada");r&&(r.style.display="none")}n("titulo").textContent="Luta ainda n\xE3o configurada",n("subtitulo").textContent="Aguardando o organizador publicar a luta.",n("status-badge").className="pill fechado",n("status-badge").textContent="em breve",n("cartaz").innerHTML="",n("minha").innerHTML="",n("lista").innerHTML='<div class="muted small">\u2014</div>',n("resultado").innerHTML="",ua(),n("foot").textContent="";return}const a=L(),e=j(a),o=Ba();{const r=n("chamada");r&&(r.textContent=a.chamada||"",r.style.display=a.chamada?"block":"none")}{const r=n("poster");r&&(G===null&&(G=r.getAttribute("src")),r.src=a.cartazImg||G)}n("titulo").innerHTML=`<span style="color:var(--azul-ink)">${i(a.lutadorA||"Lado Azul")}</span> <span class="muted">\xD7</span> <span style="color:var(--verm-ink)">${i(a.lutadorB||"Lado Vermelho")}</span>`,n("subtitulo").innerHTML=[a.evento,a.data].filter(Boolean).map(i).join(" \xB7 ")+(a.categoria?`<br><span class="pill" style="display:inline-block;margin-top:6px;background:#2b2410;border-color:#5a4a1f;color:var(--gold-ink)">${i(a.categoria)}</span>`:"");const t=n("status-badge");t.className="pill "+(e==="aberto"?"aberto":e==="encerrado"?"encerrado":"fechado"),t.textContent=e==="aberto"?"apostas abertas":e==="breve"?"abre em breve":e==="fechado"?"apostas fechadas":"encerrado",n("pool-big").textContent=x(o.pool);const m=e==="breve"&&a.abreTs?` \xB7 <span style="color:var(--gold-ink)">abre ${O(a.abreTs)}</span>`:e==="aberto"&&a.fechaTs?` \xB7 <span style="color:var(--gold-ink)">fecha ${O(a.fechaTs)}</span>`:"";n("pool-sub").innerHTML=`${o.nA+o.nB} confirmada(s)`+(o.pendente>0?` \xB7 <span style="color:var(--warn)">${x(o.pendente)} aguardando</span>`:"")+(o.pct>0?` \xB7 ${Math.round(o.pct*100)}% p/ o campe\xE3o`:"")+m;const p=(r,s,d,l,b,E)=>{const g=e==="encerrado"&&a.vencedor===r;return`<div class="corner ${r} ${g?"win":""}"><div class="side">Canto ${E}${g?" \xB7 campe\xE3o":""}</div>
+      <div class="nome">${i(s)}</div><div class="odd num">${d>0?d.toFixed(2)+"\xD7":"\u2014"}</div>
+      <div class="stat">paga por R$1</div><div class="stat num">${x(l)} \xB7 ${b} aposta(s)</div></div>`};n("cartaz").innerHTML=p("A",a.lutadorA||"Lado Azul",o.oddA,o.tA,o.nA,"Azul")+'<div class="vs">VS</div>'+p("B",a.lutadorB||"Lado Vermelho",o.oddB,o.tB,o.nB,"Vermelho");const u=o.pool>0?Math.round(o.tA/o.pool*100):50;n("split").style.width=u+"%",n("leg-a").textContent=`Azul \xB7 ${x(o.tA)} (${u}%)`,n("leg-b").textContent=`(${100-u}%) ${x(o.tB)} \xB7 Vermelho`,Fa(o),Ra(o),ka(),ua(),n("foot").innerHTML=`Sala: <b>${i($)}</b> \xB7 compartilhe este link.`+(f?" Voc\xEA \xE9 o organizador.":"")}function Fa(a){const e=L(),o=n("resultado");if(e.status!=="encerrado"||!e.vencedor){o.innerHTML="";return}const t=e.vencedor,m=Q(),p=m.filter(l=>l.pago);let u="",r="";const s=l=>f&&l.nome?l.nome:l.displayName,d=()=>p.map(l=>ca(s(l),l.lutador,l.valor,l.valor,0,l.pixRecebe)).join("")||'<div class="muted small">\u2014</div>';if(t==="empate")r="Empate: valores devolvidos",u=d();else{const l=p.filter(g=>g.lutador===t),b=l.reduce((g,Z)=>g+Z.valor,0),E=a.pool-b;if(b<=0)r="Ningu\xE9m pagou no vencedor: valores devolvidos",u=d();else{const g=E*a.pct,Z=E-g;r=`Venceu ${i(V(t))}`,u=(g>0?`<div class="payout"><span class="dot ${t}"></span><div style="flex:1"><div class="nm">${i(V(t))} <span class="tag me">bolsa do campe\xE3o</span></div></div><div class="amt num">${x(g)}</div></div>`:"")+l.map(S=>{const Y=S.valor+S.valor/b*Z;return ca(s(S),S.lutador,S.valor,Y,Y-S.valor,S.pixRecebe)}).join("")}}o.innerHTML=`<div class="card" style="border-color:#4a3c17"><div class="eyebrow" style="color:var(--gold-ink)">Resultado</div>
+    <h3 class="disp" style="font-size:22px;margin:4px 0 6px">${r}</h3>
+    <div class="note">Rateio proporcional ao valor apostado.${f?" Pague cada acertador no Pix dele.":""}</div><div style="margin-top:8px">${u}</div></div>`}function ca(a,e,o,t,m,p){return`<div class="payout"><span class="dot ${e}"></span><div style="flex:1;min-width:0">
+    <div class="nm">${i(a||"\u2014")}</div><div class="small muted num">apostou ${x(o)}${m?` \xB7 ${m>=0?"+":""}${x(m)}`:""}</div>
+    ${p&&f?`<div class="small num" style="color:var(--azul-ink);word-break:break-all">Pix: ${i(p)} <button class="btn sm ghost" data-copy="${i(p)}">copiar</button></div>`:""}
+    </div><div class="amt num">${x(t)}</div></div>`}function Ra(a){const e=L(),o=n("minha"),t=Ma(),m=j(e),p=m==="aberto";if(t&&!U){const d=wa({key:e.pixKey,nome:e.pixNome,cidade:e.pixCidade,valor:t.valor,txid:t.nome||t.displayName});o.dataset.sig="",o.innerHTML=`<div class="eyebrow">Sua aposta</div>
+      <div class="row" style="align-items:center;margin-top:8px"><span class="dot ${t.lutador}"></span>
+        <div style="flex:1"><b>${i(t.nome||t.displayName)}</b> \xB7 ${i(V(t.lutador))}<br><span class="disp" style="font-size:22px;color:var(--gold)">${x(t.valor)}</span></div>
+        <span class="tag ${t.pago?"pago":"pend"}">${t.pago?"pago \u2713":"aguardando"}</span></div>
+      ${t.pago?"":e.pixKey?`<div class="pixbox"><div class="eyebrow" style="color:var(--gold-ink)">Pague ${x(t.valor)}</div>
+        ${oa(d)?`<div class="qr">${oa(d)}</div>`:'<div class="note">C\xF3digo Pix:</div>'}
+        <button class="btn gold" data-copy="${i(d)}">Copiar Pix copia e cola</button>
+        <div class="copia">${i(d)}</div>
+        <div class="note" style="margin-top:8px">Recebedor: <b>${i(e.pixNome||"\u2014")}</b>. Depois de pagar, <b>o organizador confirma</b>.</div></div>`:'<p class="note" style="margin-top:10px">O organizador ainda n\xE3o cadastrou a chave Pix.</p>'}
+      <div class="row" style="margin-top:10px">${p?'<button class="btn sm ghost" data-act="editar">Editar aposta</button>':""}</div>`;return}if(!p&&!t){const d=m==="breve"?`ainda n\xE3o abriram${e.abreTs?", abrem "+O(e.abreTs):""}`:m==="encerrado"?"encerradas":`fechadas${e.fechaTs&&e.status!=="fechado"?" (fecharam "+O(e.fechaTs)+")":""}`;o.dataset.sig="",o.innerHTML=`<div class="eyebrow">Sua aposta</div><p class="note" style="margin-top:8px">As apostas est\xE3o <b>${d}</b>.</p>`;return}const u=t||{},r=[t?1:0,e.lutadorA||"",e.lutadorB||""].join("|");if(o.dataset.sig===r&&n("f-nome"))return;const s=n("f-nome")?{nome:n("f-nome").value,cpf:n("f-cpf").value,valor:n("f-valor").value,pix:n("f-pix").value,side:n("f-side").value}:null;o.dataset.sig=r,o.innerHTML=`<div class="eyebrow">${t?"Editar sua aposta":"Entrar no bol\xE3o"}</div>
+    <div class="field"><label>Nome completo</label><input id="f-nome" maxlength="60" placeholder="Seu nome completo" value="${i(u.nome||"")}"></div>
+    <div class="field"><label>CPF <span class="muted">(pra registrar sua aposta)</span></label><input id="f-cpf" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" value="${i(u.cpf||"")}"></div>
+    <div class="field"><label>Em quem voc\xEA aposta?</label><div class="sides">
+      <button type="button" class="sidebtn A ${u.lutador==="A"?"on":""}" data-side="A"><span class="t">${i(e.lutadorA||"Azul")}</span><span class="small">canto azul</span></button>
+      <button type="button" class="sidebtn B ${u.lutador==="B"?"on":""}" data-side="B"><span class="t">${i(e.lutadorB||"Vermelho")}</span><span class="small">canto vermelho</span></button></div></div>
+    <div class="field"><label>Valor (R$)</label><input id="f-valor" type="number" min="1" step="1" inputmode="decimal" placeholder="50" value="${u.valor||""}"></div>
     <div class="row" id="presets" style="margin-top:9px">
       <button type="button" class="btn sm chip" data-valor="30">R$ 30</button><button type="button" class="btn sm chip" data-valor="50">R$ 50</button>
       <button type="button" class="btn sm chip" data-valor="75">R$ 75</button><button type="button" class="btn sm chip" data-valor="100">R$ 100</button></div>
-    <div class="field"><label>Sua chave Pix <span class="muted">(pra você receber se ganhar)</span></label><input id="f-pix" maxlength="80" value="${esc(m.pixRecebe||'')}" placeholder="email, telefone, CPF ou aleatória"></div>
-    <input type="hidden" id="f-side" value="${m.lutador||''}">
-    <button class="btn gold block" data-act="registrar" style="margin-top:14px">${mine?'Salvar':'Registrar e gerar Pix'}</button>
-    ${mine?`<button class="btn sm ghost" data-act="cancelar" style="margin-top:8px">Cancelar</button>`:''}
-    <p class="note" style="margin-top:10px">Seu nome aparece pros outros só como <b>${esc(nomeCurto(el('f-nome')&&el('f-nome').value||m.nome||'Fulano Silva'))}</b>. Nome completo e CPF, só o organizador vê.</p>`;
-}
-function renderLista(){
-  const bs=betsList();el('cont-apostas').textContent=bs.length?`${bs.length} no total`:'';
-  if(!bs.length){el('lista').innerHTML='<div class="muted small">Ainda não há apostas. Seja o primeiro!</div>';return;}
-  const o={A:0,B:1},s=[...bs].sort((a,b)=>(o[a.lutador]-o[b.lutador])||(b.valor-a.valor));
-  el('lista').innerHTML=s.map(b=>`<div class="betrow"><span class="dot ${b.lutador}"></span>
-    <div style="flex:1;min-width:0"><div class="nm" style="flex:none">${esc(isOrg&&b.nome?b.nome:b.displayName)}${b.id===uid?' <span class="tag me">você</span>':''}</div>${isOrg&&b.cpf?`<div class="small muted num">CPF ${esc(cpfMask(b.cpf))}</div>`:''}</div>
-    <span class="num muted small">${BRL(b.valor)}</span><span class="tag ${b.pago?'pago':'pend'}">${b.pago?'pago':'pendente'}</span>
-    ${isOrg?`<button class="btn sm ghost" data-toggle="${esc(b.id)}">${b.pago?'↺':'✓ pago'}</button><button class="btn sm ghost" data-del="${esc(b.id)}" style="color:var(--verm-ink)">✕</button>`:''}</div>`).join('');
-}
-function renderOrg(){
-  const wrap=el('orgwrap'); if(wrap) wrap.hidden=!ADMIN;
-  if(!ADMIN) return;              // apostadores não veem o painel
-  const body=el('org-body');
-  const canConfig = isOrg || (email && !cfg);
-  if(canConfig){
-    el('org-state').textContent='organizador';
-    if(orgPrefilled)return;orgPrefilled=true;const c=C();
-    body.innerHTML=`<div class="row" style="justify-content:space-between;align-items:center"><h3 class="disp" style="font-size:18px">A luta</h3><button class="btn sm ghost" data-act="org-logout">Sair</button></div>
-      <div class="field"><label>Canto AZUL</label><input id="c-a" maxlength="40" value="${esc(c.lutadorA||'')}"></div>
-      <div class="field"><label>Canto VERMELHO</label><input id="c-b" maxlength="40" value="${esc(c.lutadorB||'')}"></div>
-      <div class="row"><div class="field" style="flex:1"><label>Evento</label><input id="c-ev" maxlength="60" value="${esc(c.evento||'')}"></div>
-        <div class="field" style="flex:1"><label>Data</label><input id="c-dt" maxlength="30" value="${esc(c.data||'')}"></div></div>
-      <div class="field"><label>Cartaz / foto da página (opcional)</label>
+    <div class="field"><label>Sua chave Pix <span class="muted">(pra voc\xEA receber se ganhar)</span></label><input id="f-pix" maxlength="80" value="${i(u.pixRecebe||"")}" placeholder="email, telefone, CPF ou aleat\xF3ria"></div>
+    <input type="hidden" id="f-side" value="${u.lutador||""}">
+    <button class="btn gold block" data-act="registrar" style="margin-top:14px">${t?"Salvar":"Registrar e gerar Pix"}</button>
+    ${t?'<button class="btn sm ghost" data-act="cancelar" style="margin-top:8px">Cancelar</button>':""}
+    <p class="note" style="margin-top:10px">Seu nome aparece pros outros s\xF3 como <b>${i(na(n("f-nome")&&n("f-nome").value||u.nome||"Fulano Silva"))}</b>. Nome completo e CPF, s\xF3 o organizador v\xEA.</p>`,s&&(n("f-nome").value=s.nome,n("f-cpf").value=s.cpf,n("f-valor").value=s.valor,n("f-pix").value=s.pix,n("f-side").value=s.side,o.querySelectorAll(".sidebtn").forEach(d=>d.classList.toggle("on",d.getAttribute("data-side")===s.side)))}function ka(){const a=Q();if(n("cont-apostas").textContent=a.length?`${a.length} no total`:"",!a.length){n("lista").innerHTML='<div class="muted small">Ainda n\xE3o h\xE1 apostas. Seja o primeiro!</div>';return}const e={A:0,B:1},o=[...a].sort((t,m)=>e[t.lutador]-e[m.lutador]||m.valor-t.valor);n("lista").innerHTML=o.map(t=>`<div class="betrow"><span class="dot ${t.lutador}"></span>
+    <div style="flex:1;min-width:0"><div class="nm" style="flex:none">${i(f&&t.nome?t.nome:t.displayName)}${t.id===v?' <span class="tag me">voc\xEA</span>':""}</div>${f&&t.cpf?`<div class="small muted num">CPF ${i(Ca(t.cpf))}</div>`:""}</div>
+    <span class="num muted small">${x(t.valor)}</span><span class="tag ${t.pago?"pago":"pend"}">${t.pago?"pago":"pendente"}</span>
+    ${f?`<button class="btn sm ghost" data-toggle="${i(t.id)}">${t.pago?"\u21BA":"\u2713 pago"}</button><button class="btn sm ghost" data-del="${i(t.id)}" style="color:var(--verm-ink)">\u2715</button>`:""}</div>`).join("")}function ua(){const a=n("orgwrap");if(a&&(a.hidden=!sa),!sa)return;const e=n("org-body");if(f||M&&!y){if(n("org-state").textContent="organizador",P)return;P=!0;const t=L();e.innerHTML=`<div class="row" style="justify-content:space-between;align-items:center"><h3 class="disp" style="font-size:18px">A luta</h3><button class="btn sm ghost" data-act="org-logout">Sair</button></div>
+      <div class="field"><label>Canto AZUL</label><input id="c-a" maxlength="40" value="${i(t.lutadorA||"")}"></div>
+      <div class="field"><label>Canto VERMELHO</label><input id="c-b" maxlength="40" value="${i(t.lutadorB||"")}"></div>
+      <div class="row"><div class="field" style="flex:1"><label>Evento</label><input id="c-ev" maxlength="60" value="${i(t.evento||"")}"></div>
+        <div class="field" style="flex:1"><label>Data</label><input id="c-dt" maxlength="30" value="${i(t.data||"")}"></div></div>
+      <div class="field"><label>Cartaz / foto da p\xE1gina (opcional)</label>
         <input id="c-foto" type="file" accept="image/*">
-        <div class="note" style="margin-top:4px">Escolhe uma foto do celular — ela é reduzida sozinha. Depois clica em "Salvar luta".</div>
-        <img id="foto-preview" alt="" src="${esc(c.cartazImg||'')}" style="${c.cartazImg?'':'display:none;'}width:100%;max-width:220px;border-radius:10px;margin-top:8px;border:1px solid var(--line)">
-        ${c.cartazImg?`<div><button class="btn sm ghost" data-act="remove-foto" style="margin-top:6px;color:var(--warn)">Voltar pro cartaz padrão</button></div>`:''}</div>
-      <div class="field"><label>Chamada / título (opcional, aparece em destaque)</label><input id="c-chm" maxlength="60" placeholder="Ex.: Quem leva essa? Titã ou Graduado?" value="${esc(c.chamada||'')}"></div>
-      <div class="field"><label>Tipo de duelo / categoria (aparece pra todos)</label><input id="c-cat" maxlength="50" placeholder="Ex.: Faixa Branca · Adulto · até 76kg" value="${esc(c.categoria||'')}"></div>
+        <div class="note" style="margin-top:4px">Escolha uma foto do celular. Ela \xE9 reduzida automaticamente. Depois clica em "Salvar luta".</div>
+        <img id="foto-preview" alt="" src="${i(t.cartazImg||"")}" style="${t.cartazImg?"":"display:none;"}width:100%;max-width:220px;border-radius:10px;margin-top:8px;border:1px solid var(--line)">
+        ${t.cartazImg?'<div><button class="btn sm ghost" data-act="remove-foto" style="margin-top:6px;color:var(--warn)">Voltar pro cartaz padr\xE3o</button></div>':""}</div>
+      <div class="field"><label>Chamada / t\xEDtulo (opcional, aparece em destaque)</label><input id="c-chm" maxlength="60" placeholder="Ex.: Quem leva essa? Tit\xE3 ou Graduado?" value="${i(t.chamada||"")}"></div>
+      <div class="field"><label>Tipo de duelo / categoria (aparece pra todos)</label><input id="c-cat" maxlength="50" placeholder="Ex.: Faixa Branca \xB7 Adulto \xB7 at\xE9 76kg" value="${i(t.categoria||"")}"></div>
       <h3 class="disp" style="font-size:18px;margin-top:16px">Pix (recebe as apostas)</h3>
-      <div class="field"><label>Sua chave Pix</label><input id="c-pk" maxlength="80" value="${esc(c.pixKey||'')}"></div>
-      <div class="row"><div class="field" style="flex:1"><label>Nome recebedor</label><input id="c-pn" maxlength="25" value="${esc(c.pixNome||'')}"></div>
-        <div class="field" style="flex:1"><label>Cidade</label><input id="c-pc" maxlength="15" value="${esc(c.pixCidade||'')}"></div></div>
-      <div class="field"><label>Bolsa do campeão (% do que os perdedores apostaram)</label><input id="c-tx" type="number" min="0" max="50" step="1" value="${c.premioPct??10}"></div>
+      <div class="field"><label>Sua chave Pix</label><input id="c-pk" maxlength="80" value="${i(t.pixKey||"")}"></div>
+      <div class="row"><div class="field" style="flex:1"><label>Nome recebedor</label><input id="c-pn" maxlength="25" value="${i(t.pixNome||"")}"></div>
+        <div class="field" style="flex:1"><label>Cidade</label><input id="c-pc" maxlength="15" value="${i(t.pixCidade||"")}"></div></div>
+      <div class="field"><label>Bolsa do campe\xE3o (% do que os perdedores apostaram)</label><input id="c-tx" type="number" min="0" max="50" step="1" value="${t.premioPct??10}"></div>
       <h3 class="disp" style="font-size:18px;margin-top:16px">Janela de apostas (opcional)</h3>
-      <p class="note" style="margin:2px 0 8px">Fora deste intervalo ninguém aposta — abre e fecha sozinho. Deixe em branco para controlar na mão.</p>
-      <div class="row"><div class="field" style="flex:1"><label>Abre em</label><input id="c-abre" type="datetime-local" value="${tsToLocal(c.abreTs)}"></div>
-        <div class="field" style="flex:1"><label>Fecha em</label><input id="c-fecha" type="datetime-local" value="${tsToLocal(c.fechaTs)}"></div></div>
+      <p class="note" style="margin:2px 0 8px">Fora deste intervalo ningu\xE9m aposta. Abre e fecha sozinho. Deixe em branco para controlar na m\xE3o.</p>
+      <div class="row"><div class="field" style="flex:1"><label>Abre em</label><input id="c-abre" type="datetime-local" value="${ia(t.abreTs)}"></div>
+        <div class="field" style="flex:1"><label>Fecha em</label><input id="c-fecha" type="datetime-local" value="${ia(t.fechaTs)}"></div></div>
       <button class="btn gold block" data-act="salvar-cfg" style="margin-top:12px">Salvar luta</button>
       <div class="hr"></div>
       <div class="row"><button class="btn sm" data-act="st-aberto">Abrir apostas</button><button class="btn sm" data-act="st-fechado">Fechar apostas</button></div>
@@ -419,105 +129,8 @@ function renderOrg(){
         <button class="btn sm" data-act="venc-B" style="border-color:#5e2530;color:var(--verm-ink)">Venceu Vermelho</button>
         <button class="btn sm ghost" data-act="venc-empate">Empate</button></div>
       <div id="org-confirm" class="small" style="margin-top:8px"></div>
-      <div class="hr"></div><button class="btn sm ghost" data-act="reabrir" style="color:var(--warn)">Reabrir apostas</button>`;
-    return;
-  }
-  el('org-state').textContent='entrar';orgPrefilled=false;
-  if(email && cfg && cfg.ownerUid && cfg.ownerUid!==uid){
-    body.innerHTML=`<p class="note">Esta sala já tem um organizador, e <b>${esc(email)}</b> não é o dono dela. Para organizar outra luta, troque o final do link por <code>#outronome</code>.</p><button class="btn sm ghost" data-act="org-logout" style="margin-top:8px">Sair</button>`;
-    return;
-  }
-  body.innerHTML=`<label>E-mail do organizador</label><input id="org-email" type="email" autocomplete="username" placeholder="voce@email.com">
+      <div class="hr"></div><button class="btn sm ghost" data-act="reabrir" style="color:var(--warn)">Reabrir apostas</button>`;return}if(n("org-state").textContent="entrar",P=!1,M&&y&&y.ownerUid&&y.ownerUid!==v){e.innerHTML=`<p class="note">Esta sala j\xE1 tem um organizador, e <b>${i(M)}</b> n\xE3o \xE9 o dono dela. Para organizar outra luta, troque o final do link por <code>#outronome</code>.</p><button class="btn sm ghost" data-act="org-logout" style="margin-top:8px">Sair</button>`;return}e.innerHTML=`<label>E-mail do organizador</label><input id="org-email" type="email" autocomplete="username" placeholder="voce@email.com">
     <div class="field"><label>Senha</label><input id="org-pass" type="password" autocomplete="current-password" placeholder="sua senha"></div>
-    <div class="row" style="margin-top:12px"><button class="btn gold" data-act="org-login" style="flex:1">Entrar</button><button class="btn ghost" data-act="org-signup" style="flex:1">Criar conta</button></div>`;
-}
-
-/* Escritas */
-async function saveCfg(patch){
-  try{
-    if(!cfg){ await setDoc(roomRef(),{...DEFAULT_CFG,...patch,ownerUid:uid}); }
-    else{ await updateDoc(roomRef(),patch); }
-  }catch(e){ console.warn(e); toast('Sem permissão (regras do Firestore?)'); }
-}
-let pendingVenc=null;
-document.addEventListener('click',async ev=>{
-  const cp=ev.target.closest('[data-copy]');
-  if(cp){try{await navigator.clipboard.writeText(cp.getAttribute('data-copy'));toast('Copiado');}catch(e){toast('Selecione e copie');}return;}
-  const sb=ev.target.closest('[data-side]');
-  if(sb){el('f-side').value=sb.getAttribute('data-side');document.querySelectorAll('.sidebtn[data-side]').forEach(x=>x.classList.toggle('on',x===sb));return;}
-  const vc=ev.target.closest('[data-valor]');
-  if(vc){el('f-valor').value=vc.getAttribute('data-valor');document.querySelectorAll('.chip[data-valor]').forEach(x=>x.classList.toggle('on',x===vc));return;}
-  const tg=ev.target.closest('[data-toggle]');
-  if(tg&&isOrg){const id=tg.getAttribute('data-toggle');try{await setDoc(doc(db,'salas',ROOM,'pagos',id),{pago:!pagos[id]});toast(!pagos[id]?'Confirmado':'Pendente');}catch(e){toast('Erro');}return;}
-  const dl=ev.target.closest('[data-del]');
-  if(dl&&isOrg){const id=dl.getAttribute('data-del');try{await deleteDoc(doc(db,'salas',ROOM,'apostas',id));await deleteDoc(doc(db,'salas',ROOM,'pagos',id)).catch(()=>{});await deleteDoc(doc(db,'salas',ROOM,'privado',id)).catch(()=>{});toast('Removida');}catch(e){toast('Erro');}return;}
-  const a=ev.target.closest('[data-act]');if(!a)return;const act=a.getAttribute('data-act');
-
-  if(act==='editar'){editing=true;render();return;}
-  if(act==='cancelar'){editing=false;render();return;}
-  if(act==='registrar'){
-    const nome=(el('f-nome').value||'').trim(),cpf=(el('f-cpf').value||'').replace(/\D/g,''),side=el('f-side').value,valor=+el('f-valor').value,pix=(el('f-pix').value||'').trim();
-    {const es=effStatus();if(es!=='aberto')return toast(es==='breve'?'As apostas ainda não abriram':'As apostas estão fechadas');}
-    if(nome.split(/\s+/).filter(Boolean).length<2)return toast('Digite seu nome completo');
-    if(!isCPF(cpf))return toast('CPF inválido');
-    if(side!=='A'&&side!=='B')return toast('Escolha um lutador');
-    if(!(valor>0))return toast('Digite o valor');
-    if(!uid)return toast('Conectando… tente de novo');
-    try{
-      await setDoc(doc(db,'salas',ROOM,'apostas',uid),{displayName:nomeCurto(nome),lutador:side,valor,ts:Date.now()});
-      await setDoc(doc(db,'salas',ROOM,'privado',uid),{nome,cpf,pixRecebe:pix});
-      editing=false;toast('Aposta registrada!');
-    }catch(e){console.warn(e);toast('Não deu pra registrar');}
-    return;
-  }
-  // login organizador
-  if(act==='org-login'||act==='org-signup'){
-    const em=(el('org-email').value||'').trim(),pw=el('org-pass').value||'';
-    if(!em||pw.length<6)return toast('E-mail e senha (mín. 6) obrigatórios');
-    try{
-      if(act==='org-signup') await createUserWithEmailAndPassword(auth,em,pw);
-      else await signInWithEmailAndPassword(auth,em,pw);
-      toast('Login ok');
-    }catch(e){ toast(e.code==='auth/invalid-credential'?'E-mail ou senha errados':e.code==='auth/email-already-in-use'?'Conta já existe — use Entrar':e.code==='auth/weak-password'?'Senha fraca (mín. 6)':'Falha no login'); }
-    return;
-  }
-  if(act==='org-logout'){ try{ await signOut(auth); await signInAnonymously(auth); toast('Saiu do modo organizador'); }catch(e){} return; }
-
-  if(!isOrg && !(email && !cfg))return;
-  if(act==='salvar-cfg'){
-    const patch={lutadorA:(el('c-a').value||'').trim(),lutadorB:(el('c-b').value||'').trim(),evento:(el('c-ev').value||'').trim(),data:(el('c-dt').value||'').trim(),chamada:(el('c-chm').value||'').trim(),categoria:(el('c-cat').value||'').trim(),
-      pixKey:(el('c-pk').value||'').trim(),pixNome:(el('c-pn').value||'').trim(),pixCidade:(el('c-pc').value||'').trim(),
-      premioPct:Math.max(0,Math.min(50,+el('c-tx').value||0)),
-      abreTs:localToTs(el('c-abre').value),fechaTs:localToTs(el('c-fecha').value)};
-    if(!patch.lutadorA||!patch.lutadorB)return toast('Preencha os dois lados');
-    if(patch.abreTs&&patch.fechaTs&&patch.fechaTs<=patch.abreTs)return toast('O fechamento tem que ser depois da abertura');
-    if(fotoNova!==null)patch.cartazImg=fotoNova;
-    await saveCfg(patch);fotoNova=null;toast('Luta salva');return;
-  }
-  if(act==='remove-foto'){ fotoNova=null; await saveCfg({cartazImg:''}); orgPrefilled=false; toast('Voltou ao cartaz padrão'); render(); return; }
-  if(!isOrg)return;
-  if(act==='st-aberto'){await saveCfg({status:'aberto'});toast('Apostas abertas');return;}
-  if(act==='st-fechado'){await saveCfg({status:'fechado'});toast('Apostas fechadas');return;}
-  if(act==='reabrir'){await saveCfg({status:'aberto',vencedor:null});toast('Reaberto');return;}
-  if(act==='venc-A'||act==='venc-B'||act==='venc-empate'){
-    const v=act==='venc-A'?'A':act==='venc-B'?'B':'empate';
-    if(pendingVenc!==v){pendingVenc=v;el('org-confirm').innerHTML=`Confirmar <b>${v==='empate'?'empate':'vitória de '+esc(sideName(v))}</b>? <button class="btn sm gold" data-act="venc-ok">Confirmar</button>`;return;}
-  }
-  if(act==='venc-ok'){const v=pendingVenc;pendingVenc=null;el('org-confirm').innerHTML='';if(v){await saveCfg({status:'encerrado',vencedor:v});toast('Resultado publicado');}return;}
-});
-document.addEventListener('input',e=>{ if(e.target.id==='f-valor'){const v=e.target.value;document.querySelectorAll('.chip[data-valor]').forEach(x=>x.classList.toggle('on',x.getAttribute('data-valor')===v));} });
-document.addEventListener('change',e=>{
-  if(e.target.id!=='c-foto')return;
-  const f=e.target.files&&e.target.files[0]; if(!f)return;
-  if(!/^image\//.test(f.type))return toast('Escolha uma imagem');
-  toast('Preparando a foto…');
-  lerFoto(f,d=>{ if(!d)return toast('Imagem muito pesada — tente outra');
-    fotoNova=d; const pv=el('foto-preview'); if(pv){pv.src=d;pv.style.display='block';}
-    toast('Foto pronta — clique em “Salvar luta”'); });
-});
-// Relógio: quando a janela abre/fecha, atualiza o status sozinho (sem recarregar).
-let lastEff=null;
-setInterval(()=>{ if(!cfg)return; const now=effStatus(); if(now!==lastEff){ lastEff=now; render(); } }, 15000);
-</script>
+    <div class="row" style="margin-top:12px"><button class="btn gold" data-act="org-login" style="flex:1">Entrar</button><button class="btn ghost" data-act="org-signup" style="flex:1">Criar conta</button></div>`}async function R(a){try{y?await ga(W(),a):await H(W(),{...la,...a,ownerUid:v})}catch(e){console.warn(e),c("Sem permiss\xE3o (regras do Firestore?)")}}let K=null;document.addEventListener("click",async a=>{const e=a.target.closest("[data-copy]");if(e){try{await navigator.clipboard.writeText(e.getAttribute("data-copy")),c("Copiado")}catch{c("Selecione e copie")}return}const o=a.target.closest("[data-side]");if(o){n("f-side").value=o.getAttribute("data-side"),document.querySelectorAll(".sidebtn[data-side]").forEach(s=>s.classList.toggle("on",s===o));return}const t=a.target.closest("[data-valor]");if(t){n("f-valor").value=t.getAttribute("data-valor"),document.querySelectorAll(".chip[data-valor]").forEach(s=>s.classList.toggle("on",s===t));return}const m=a.target.closest("[data-toggle]");if(m&&f){const s=m.getAttribute("data-toggle");try{await H(C(A,"salas",$,"pagos",s),{pago:!F[s]}),c(F[s]?"Pendente":"Confirmado")}catch{c("Erro")}return}const p=a.target.closest("[data-del]");if(p&&f){const s=p.getAttribute("data-del");try{await _(C(A,"salas",$,"apostas",s)),await _(C(A,"salas",$,"pagos",s)).catch(()=>{}),await _(C(A,"salas",$,"privado",s)).catch(()=>{}),c("Removida")}catch{c("Erro")}return}const u=a.target.closest("[data-act]");if(!u)return;const r=u.getAttribute("data-act");if(r==="editar"){U=!0,T();return}if(r==="cancelar"){U=!1,T();return}if(r==="registrar"){const s=(n("f-nome").value||"").trim(),d=(n("f-cpf").value||"").replace(/\D/g,""),l=n("f-side").value,b=+n("f-valor").value,E=(n("f-pix").value||"").trim();{const g=j();if(g!=="aberto")return c(g==="breve"?"As apostas ainda n\xE3o abriram":"As apostas est\xE3o fechadas")}if(s.split(/\s+/).filter(Boolean).length<2)return c("Digite seu nome completo");if(!Ta(d))return c("CPF inv\xE1lido");if(l!=="A"&&l!=="B")return c("Escolha um lutador");if(!(b>0))return c("Digite o valor");if(!v)return c("Conectando\u2026 tente de novo");try{await H(C(A,"salas",$,"apostas",v),{displayName:na(s),lutador:l,valor:b,ts:Date.now()}),await H(C(A,"salas",$,"privado",v),{nome:s,cpf:d,pixRecebe:E}),U=!1,c("Aposta registrada!")}catch(g){console.warn(g),c("N\xE3o deu pra registrar")}return}if(r==="org-login"||r==="org-signup"){const s=(n("org-email").value||"").trim(),d=n("org-pass").value||"";if(!s||d.length<6)return c("E-mail e senha (m\xEDn. 6) obrigat\xF3rios");try{r==="org-signup"?await xa(z,s,d):await ya(z,s,d),c("Login ok")}catch(l){c(l.code==="auth/invalid-credential"?"E-mail ou senha errados":l.code==="auth/email-already-in-use"?"Conta j\xE1 existe. Use Entrar":l.code==="auth/weak-password"?"Senha fraca (m\xEDn. 6)":"Falha no login")}return}if(r==="org-logout"){try{await $a(z),await aa(z),c("Saiu do modo organizador")}catch{}return}if(!(!f&&!(M&&!y))){if(r==="salvar-cfg"){const s={lutadorA:(n("c-a").value||"").trim(),lutadorB:(n("c-b").value||"").trim(),evento:(n("c-ev").value||"").trim(),data:(n("c-dt").value||"").trim(),chamada:(n("c-chm").value||"").trim(),categoria:(n("c-cat").value||"").trim(),pixKey:(n("c-pk").value||"").trim(),pixNome:(n("c-pn").value||"").trim(),pixCidade:(n("c-pc").value||"").trim(),premioPct:Math.max(0,Math.min(50,+n("c-tx").value||0)),abreTs:da(n("c-abre").value),fechaTs:da(n("c-fecha").value)};if(!s.lutadorA||!s.lutadorB)return c("Preencha os dois lados");if(s.abreTs&&s.fechaTs&&s.fechaTs<=s.abreTs)return c("O fechamento tem que ser depois da abertura");N!==null&&(s.cartazImg=N),await R(s),N=null,c("Luta salva");return}if(r==="remove-foto"){N=null,await R({cartazImg:""}),P=!1,c("Voltou ao cartaz padr\xE3o"),T();return}if(f){if(r==="st-aberto"){await R({status:"aberto"}),c("Apostas abertas");return}if(r==="st-fechado"){await R({status:"fechado"}),c("Apostas fechadas");return}if(r==="reabrir"){await R({status:"aberto",vencedor:null}),c("Reaberto");return}if(r==="venc-A"||r==="venc-B"||r==="venc-empate"){const s=r==="venc-A"?"A":r==="venc-B"?"B":"empate";if(K!==s){K=s,n("org-confirm").innerHTML=`Confirmar <b>${s==="empate"?"empate":"vit\xF3ria de "+i(V(s))}</b>? <button class="btn sm gold" data-act="venc-ok">Confirmar</button>`;return}}if(r==="venc-ok"){const s=K;K=null,n("org-confirm").innerHTML="",s&&(await R({status:"encerrado",vencedor:s}),c("Resultado publicado"));return}}}}),document.addEventListener("input",a=>{if(a.target.id==="f-valor"){const e=a.target.value;document.querySelectorAll(".chip[data-valor]").forEach(o=>o.classList.toggle("on",o.getAttribute("data-valor")===e))}}),document.addEventListener("change",a=>{if(a.target.id!=="c-foto")return;const e=a.target.files&&a.target.files[0];if(e){if(!/^image\//.test(e.type))return c("Escolha uma imagem");c("Preparando a foto\u2026"),Sa(e,o=>{if(!o)return c("Imagem muito pesada \u2014 tente outra");N=o;const t=n("foto-preview");t&&(t.src=o,t.style.display="block"),c("Foto pronta \u2014 clique em \u201CSalvar luta\u201D")})}});let pa=null;setInterval(()=>{if(!y)return;const a=j();a!==pa&&(pa=a,T())},15e3);</script>
 </body>
 </html>
