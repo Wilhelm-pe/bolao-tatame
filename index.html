@@ -187,7 +187,7 @@ function pixPayload(o){if(!o.key)return'';const mai=emv('00','br.gov.bcb.pix')+e
   let p=emv('00','01')+emv('01','11')+emv('26',mai)+emv('52','0000')+emv('53','986');
   if(o.valor&&+o.valor>0)p+=emv('54',(+o.valor).toFixed(2));
   p+=emv('58','BR')+emv('59',(au(o.nome)||'RECEBEDOR').slice(0,25))+emv('60',(au(o.cidade)||'CIDADE').slice(0,15));
-  p+=emv('62',emv('05',(o.txid||'***').slice(0,25)));p+='6304';return p+crc16(p);}
+  const tx=String(o.txid||'').normalize('NFD').replace(/[^A-Za-z0-9]/g,'').slice(0,25)||'***';p+=emv('62',emv('05',tx));p+='6304';return p+crc16(p);}
 function qrSvg(p){try{if(typeof qrcode==='undefined')return'';const q=qrcode(0,'M');q.addData(p);q.make();return q.createSvgTag({cellSize:5,margin:0,scalable:true});}catch(e){return'';}}
 function isCPF(c){c=(c||'').replace(/\D/g,'');if(c.length!==11||/^(\d)\1{10}$/.test(c))return false;let s=0;for(let i=0;i<9;i++)s+=+c[i]*(10-i);let d=(s*10)%11;if(d>9)d=0;if(d!==+c[9])return false;s=0;for(let i=0;i<10;i++)s+=+c[i]*(11-i);d=(s*10)%11;if(d>9)d=0;return d===+c[10];}
 const cpfMask=c=>{c=(c||'').replace(/\D/g,'').padEnd(11,'•');return c.slice(0,3)+'.'+c.slice(3,6)+'.'+c.slice(6,9)+'-'+c.slice(9,11);};
