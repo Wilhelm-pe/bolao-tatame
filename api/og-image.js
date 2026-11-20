@@ -1,5 +1,5 @@
 const PROJECT = 'bolao-tatame';
-const KEY = 'AIzaSyCs•••••••••••••••••••••••••••••••';
+const KEY = 'AIzaSyCsJBL4Fnm_YN1EIAKHfl_KIZmqvSuw-zM';
 const ORIGIN = 'https://bolao-tatame.vercel.app';
 
 module.exports = async (req, res) => {
@@ -12,19 +12,17 @@ module.exports = async (req, res) => {
       const dataUrl = j && j.fields && j.fields.cartazImg && j.fields.cartazImg.stringValue;
       const m = dataUrl && dataUrl.match(/^data:(image\/[a-z]+);base64,(.+)$/);
       if (m) {
-        const buf = Buffer.from(m[2], 'base64');
         res.setHeader('Content-Type', m[1]);
         res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=300');
-        return res.status(200).send(buf);
+        return res.status(200).send(Buffer.from(m[2], 'base64'));
       }
     }
   } catch (e) {}
   try {
     const def = await fetch(`${ORIGIN}/cartaz.jpg`);
-    const buf = Buffer.from(await def.arrayBuffer());
     res.setHeader('Content-Type', 'image/jpeg');
     res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=300');
-    return res.status(200).send(buf);
+    return res.status(200).send(Buffer.from(await def.arrayBuffer()));
   } catch (e) {
     return res.status(302).setHeader('Location', `${ORIGIN}/cartaz.jpg`).end();
   }
